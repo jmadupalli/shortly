@@ -13,5 +13,5 @@ spring:
 
 server:
   servlet:
-    context-path: /api
+    context-path: /u
   port: ${SERVER_PORT}

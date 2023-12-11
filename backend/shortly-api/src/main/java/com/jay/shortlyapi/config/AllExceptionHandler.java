@@ -1,8 +1,10 @@
 package com.jay.shortlyapi.config;
 
 import com.jay.shortlyapi.controllers.dto.ErrorResponse;
+import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -27,7 +29,16 @@ public class AllExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseEntity<ErrorResponse> handleAccessDenied(AccessDeniedException exc) {
+        ErrorResponse response = new ErrorResponse(exc.getMessage(), HttpStatus.FORBIDDEN.value());
+        return new ResponseEntity<>(response, HttpStatus.FORBIDDEN);
+    }
 
-
+    @ExceptionHandler(ExpiredJwtException.class)
+    public ResponseEntity<ErrorResponse> handleExpiredJwt(ExpiredJwtException exc) {
+        ErrorResponse response = new ErrorResponse(exc.getMessage(), HttpStatus.FORBIDDEN.value());
+        return new ResponseEntity<>(response, HttpStatus.FORBIDDEN);
+    }
 
 }
