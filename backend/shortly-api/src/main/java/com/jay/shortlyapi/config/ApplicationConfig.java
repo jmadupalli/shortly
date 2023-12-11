@@ -1,6 +1,6 @@
 package com.jay.shortlyapi.config;
 
-import com.jay.shortlyapi.repos.UserRepository;
+import com.jay.shortlyapi.respositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

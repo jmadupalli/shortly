@@ -1,7 +1,6 @@
 spring:
   config:
     import: optional:file:.env[.properties]
-
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/${DB_NAME}
@@ -11,3 +10,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+
+server:
+  servlet:
+    context-path: /api

@@ -1,4 +1,4 @@
-package com.jay.shortlyapi.entity;
+package com.jay.shortlyapi.entities;
 
 import com.jay.shortlyapi.util.Role;
 import jakarta.persistence.*;

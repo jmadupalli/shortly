@@ -1,4 +1,4 @@
-package com.jay.shortlyapi.service;
+package com.jay.shortlyapi.services;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

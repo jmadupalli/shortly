@@ -1,6 +1,6 @@
-package com.jay.shortlyapi.repos;
+package com.jay.shortlyapi.respositories;
 
-import com.jay.shortlyapi.entity.User;
+import com.jay.shortlyapi.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
