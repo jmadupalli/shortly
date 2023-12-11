@@ -18,6 +18,7 @@ const ShortlyTable = () => {
                 <tr className="text-center">
                   <th className="p-3">SNO #</th>
                   <th className="p-3">Short URL</th>
+                  <th className="p-3">Original URL</th>
                   <th className="p-3">Date Created</th>
                   <th className="p-3">Action</th>
                 </tr>
@@ -25,13 +26,14 @@ const ShortlyTable = () => {
               <tbody className="max-h-full overflow-auto">
                 {result.data?.length == 0 ? (
                   <tr className="text-bold font-bold">
-                    <td colSpan={4}>No URLs found</td>
+                    <td colSpan={5}>No URLs found</td>
                   </tr>
                 ) : (
                   result.data?.map((value, ind) => (
                     <ShortlyRow
                       sno={ind + 1}
                       shortCode={value.shortCode}
+                      originalURL={value.originalURL}
                       created={value.created}
                     />
                   ))

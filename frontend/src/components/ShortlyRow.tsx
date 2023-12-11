@@ -4,10 +4,12 @@ import Spinner from "./Spinner";
 const ShortlyRow = ({
   sno,
   shortCode,
+  originalURL,
   created,
 }: {
   sno: number;
   shortCode: string;
+  originalURL: string;
   created: string;
 }) => {
   const [deleteShort, result] = useDeleteShortMutation();
@@ -28,6 +30,9 @@ const ShortlyRow = ({
             {shortURL}
           </a>
         </p>
+      </td>
+      <td className="p-3">
+        <p>{originalURL}</p>
       </td>
       <td className="p-3">
         <p>{new Date(created).toLocaleString()}</p>
