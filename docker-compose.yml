@@ -1,0 +1,35 @@
+services:
+  react-ui:
+    container_name: shortly-ui
+    build:
+      context: ./frontend
+    environment:
+      VITE_API_URL: http://localhost:9002/api
+    ports:
+      - 3000:80
+  
+  spring-api:
+    container_name: shortly-api
+    build:
+      context: ./backend/shortly-api
+    depends_on:
+      - postgres
+    environment:
+      SECRET_KEY: 313d05f92bcdf27dfaee222d058e45719edbff01dbf1d949521370b89fac52ab
+      DB_URL: jdbc:postgresql://postgres:5432/spring_shortly
+      DB_USERNAME: shortly
+      DB_PASSWORD: Test1234
+      SERVER_PORT: 9002
+    ports:
+      - 9002:9002
+
+  postgres:
+    container_name: app_postgres
+    image: postgres:14-alpine
+    environment:
+      POSTGRES_USER: shortly
+      POSTGRES_PASSWORD: Test1234
+      POSTGRES_DB: spring_shortly
+    ports:
+      - 5432
+
