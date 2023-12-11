@@ -1,6 +1,15 @@
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { RootState } from "../redux/store";
+import { logout } from "../redux/features/userSlice";
 
 const Header = () => {
+  const userState = useSelector((state: RootState) => state.user);
+  const dispatch = useDispatch();
+  const handleLogout = () => {
+    localStorage.removeItem("userState");
+    dispatch(logout());
+  };
   return (
     <header className="bg-gray-800 p-4 text-gray-100">
       <div className="container mx-auto flex h-16 justify-between">
@@ -11,19 +20,30 @@ const Header = () => {
         >
           Shortly
         </Link>
-
-        <div className="my-auto flex-shrink-0 items-center lg:flex">
-          <Link to="/register">
-            <button className="mr-1 self-center rounded bg-blue-400 px-5 py-2 text-xs font-semibold text-gray-900 lg:px-8 lg:py-3">
-              Sign up
+        {userState ? (
+          <div className="my-auto flex-shrink-0 items-center lg:flex">
+            Hello, {userState.firstName}!
+            <button
+              onClick={handleLogout}
+              className="self-center rounded bg-blue-400 px-5 py-2 text-xs font-semibold text-gray-900 lg:px-8 lg:py-3"
+            >
+              Logout
             </button>
-          </Link>
-          <Link to="/login">
-            <button className="self-center rounded bg-blue-400 px-5 py-2 text-xs font-semibold text-gray-900 lg:px-8 lg:py-3">
-              Login
-            </button>
-          </Link>
-        </div>
+          </div>
+        ) : (
+          <div className="my-auto flex-shrink-0 items-center lg:flex">
+            <Link to="/register">
+              <button className="mr-1 self-center rounded bg-blue-400 px-5 py-2 text-xs font-semibold text-gray-900 lg:px-8 lg:py-3">
+                Sign up
+              </button>
+            </Link>
+            <Link to="/login">
+              <button className="self-center rounded bg-blue-400 px-5 py-2 text-xs font-semibold text-gray-900 lg:px-8 lg:py-3">
+                Login
+              </button>
+            </Link>
+          </div>
+        )}
       </div>
     </header>
   );

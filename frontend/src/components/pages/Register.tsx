@@ -1,5 +1,9 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { ApiError, callRegister } from "../../api";
+import ErrorComp from "../ErrorComp";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -8,9 +12,22 @@ const Register = () => {
     email: "",
     password: "",
   });
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+  const userState = useSelector((state: RootState) => state.user);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  useEffect(() => {
+    if (userState) navigate("/");
+  }, [userState, navigate]);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const response = await callRegister(formData).catch((err: ApiError) =>
+      setError(err.response.data.message),
+    );
+    if (response) {
+      navigate("/login");
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,6 +37,8 @@ const Register = () => {
 
   return (
     <>
+      {error && <ErrorComp error={error} setError={setError} />}
+
       <div className="flex h-full align-middle">
         <div className="m-auto flex max-w-md flex-col rounded-md bg-gray-900 p-6 text-gray-100 sm:p-10">
           <div className="mb-8 text-center">
