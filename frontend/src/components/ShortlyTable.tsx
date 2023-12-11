@@ -13,7 +13,7 @@ const ShortlyTable = () => {
           {result.isLoading ? (
             <Spinner />
           ) : (
-            <table className="min-w-full text-sm">
+            <table className="min-w-full text-xs">
               <thead className="dark:dark:bg-gray-700">
                 <tr className="text-center">
                   <th className="p-3">SNO #</th>
@@ -22,7 +22,7 @@ const ShortlyTable = () => {
                   <th className="p-3">Action</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="max-h-full overflow-auto">
                 {result.data?.length == 0 ? (
                   <tr className="text-bold font-bold">
                     <td colSpan={4}>No URLs found</td>

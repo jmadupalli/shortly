@@ -34,7 +34,7 @@ const ShortlyForm = () => {
           <Spinner />
         ) : (
           <button
-            className="m-auto block rounded bg-red-400 px-8 py-3 xl:ml-2 xl:inline"
+            className="m-auto block rounded bg-red-400 px-8 py-3 sm:inline xl:ml-2"
             type="submit"
           >
             Submit
