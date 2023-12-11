@@ -14,7 +14,7 @@ export type ApiError = {
 export type LoginResponse = {
   firstName: string;
   lastName: string;
-  token: string;
+  jwtToken: string;
 };
 
 export const callLogin = (loginDTO: { email: string; password: string }) => {

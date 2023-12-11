@@ -2,6 +2,8 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { RootState } from "../../redux/store";
+import ShortlyForm from "../ShortlyForm";
+import ShortlyTable from "../ShortlyTable";
 
 const Home = () => {
   const userState = useSelector((state: RootState) => state.user);
@@ -12,9 +14,10 @@ const Home = () => {
   }, [userState, navigate]);
 
   return (
-    <div className="text-center font-bold text-white">
-      Welcome to Shortly, {userState?.firstName}!
-    </div>
+    <>
+      <ShortlyForm />
+      <ShortlyTable />
+    </>
   );
 };
 

@@ -3,7 +3,7 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 export type UserState = {
   firstName: string;
   lastName: string;
-  token: string;
+  jwtToken: string;
 };
 
 const getInitialState = () => {

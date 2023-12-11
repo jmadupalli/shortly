@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { RootState } from "../redux/store";
 import { logout } from "../redux/features/userSlice";
+import { shortlyApi } from "../redux/features/shortlyApi";
 
 const Header = () => {
   const userState = useSelector((state: RootState) => state.user);
@@ -9,6 +10,7 @@ const Header = () => {
   const handleLogout = () => {
     localStorage.removeItem("userState");
     dispatch(logout());
+    dispatch(shortlyApi.util.resetApiState());
   };
   return (
     <header className="bg-gray-800 p-4 text-gray-100">
@@ -25,7 +27,7 @@ const Header = () => {
             Hello, {userState.firstName}!
             <button
               onClick={handleLogout}
-              className="self-center rounded bg-blue-400 px-5 py-2 text-xs font-semibold text-gray-900 lg:px-8 lg:py-3"
+              className="ml-2 self-center rounded bg-blue-400 px-5 py-2 text-xs font-semibold text-gray-900 lg:px-8 lg:py-3"
             >
               Logout
             </button>
