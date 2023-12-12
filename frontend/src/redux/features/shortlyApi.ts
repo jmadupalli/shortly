@@ -27,6 +27,9 @@ export const shortlyApi = createApi({
       query: () => "shortly/",
       providesTags: ["shorts"],
     }),
+    getShortlyStats: builder.query<void, string>({
+      query: (shortCode: string) => `shortly/stats/${shortCode}`
+    }),
     createShort: builder.mutation<void, { originalURL: string }>({
       query: (body: { originalURL: string }) => ({
         url: "shortly/",
@@ -47,6 +50,7 @@ export const shortlyApi = createApi({
 
 export const {
   useGetUserShortsQuery,
+  useGetShortlyStatsQuery,
   useCreateShortMutation,
   useDeleteShortMutation,
 } = shortlyApi;

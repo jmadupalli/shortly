@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { useDeleteShortMutation } from "../redux/features/shortlyApi";
 import Spinner from "./Spinner";
 
@@ -14,6 +15,7 @@ const ShortlyRow = ({
 }) => {
   const [deleteShort, result] = useDeleteShortMutation();
   const shortURL = import.meta.env.VITE_API_URL + "/" + shortCode;
+  const navigate = useNavigate();
 
   const handleDelete = () => {
     deleteShort(shortCode);
@@ -38,6 +40,12 @@ const ShortlyRow = ({
         <p>{new Date(created).toLocaleString()}</p>
       </td>
       <td className="p-3">
+        <button
+          onClick={() => navigate("/stats/" + shortCode)}
+          className="m-1 rounded-md px-3 py-1 font-semibold dark:dark:bg-blue-400 dark:dark:text-gray-900"
+        >
+          Stats
+        </button>
         {result.isLoading ? (
           <Spinner />
         ) : (
