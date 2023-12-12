@@ -5,6 +5,7 @@
 >  docker compose up
 
 Application UI will be live at: http://localhost:3000
+
 Backend API will be live at: http://localhost:9002/u/
 
 ## Backend API Docs:
