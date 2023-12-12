@@ -4,10 +4,10 @@ import com.jay.shortlyapi.services.ShortlyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.Map;
 
 @RequestMapping("/")
 @RestController
@@ -21,10 +21,11 @@ public class RootController {
     }
 
     @GetMapping("/{shortCode}")
-    public ResponseEntity<Void> redirectToOriginal(@PathVariable String shortCode) throws Exception{
+    public ResponseEntity<Void> redirectToOriginal(@PathVariable String shortCode, @RequestHeader Map<String, String> headers)
+            throws Exception{
         return ResponseEntity
                 .status(HttpStatus.MOVED_PERMANENTLY)
-                .location(URI.create(shortlyService.getOriginalURL(shortCode)))
+                .location(URI.create(shortlyService.getOriginalURL(shortCode, headers)))
                 .build();
     }
 

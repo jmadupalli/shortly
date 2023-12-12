@@ -26,7 +26,7 @@ public class Shortly {
 
     private String originalURL;
 
-    @Column(unique = true)
+    @Column(unique = true, name = "short_code")
     private String shortCode;
 
     @ManyToOne(fetch = FetchType.LAZY)
