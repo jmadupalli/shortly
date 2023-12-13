@@ -8,6 +8,16 @@ type ShortURL = {
   created: string;
 };
 
+export type CountryData = [{ country: string; total: number }];
+export type BrowserData = [{ browser: string; total: number }];
+export type DeviceData = [{ device: string; os: string; total: number }];
+
+type StatsResponse = {
+  country: CountryData;
+  browser: BrowserData;
+  deviceAndOs: DeviceData;
+};
+
 export const shortlyApi = createApi({
   reducerPath: "shortlyApi",
   baseQuery: fetchBaseQuery({
@@ -27,8 +37,8 @@ export const shortlyApi = createApi({
       query: () => "shortly/",
       providesTags: ["shorts"],
     }),
-    getShortlyStats: builder.query<void, string>({
-      query: (shortCode: string) => `shortly/stats/${shortCode}`
+    getShortlyStats: builder.query<StatsResponse, string>({
+      query: (shortCode: string) => `shortly/stats/${shortCode}`,
     }),
     createShort: builder.mutation<void, { originalURL: string }>({
       query: (body: { originalURL: string }) => ({

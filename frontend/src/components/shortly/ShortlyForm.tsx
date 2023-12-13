@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import Spinner from "./Spinner";
-import { useCreateShortMutation } from "../redux/features/shortlyApi";
+import Spinner from "../util/Spinner";
+import { useCreateShortMutation } from "../../redux/features/shortlyApi";
 
 const ShortlyForm = () => {
   const [originalURL, setOriginalURL] = useState("");

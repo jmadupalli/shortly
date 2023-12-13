@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import { useDeleteShortMutation } from "../redux/features/shortlyApi";
-import Spinner from "./Spinner";
+import { useDeleteShortMutation } from "../../redux/features/shortlyApi";
+import Spinner from "../util/Spinner";
 
 const ShortlyRow = ({
   sno,

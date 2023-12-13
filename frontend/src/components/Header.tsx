@@ -51,7 +51,7 @@ const Header = () => {
         </div>
       </header>
       <Toaster
-        position="top-left"
+        position="top-center"
         toastOptions={{
           className: "",
           style: {
