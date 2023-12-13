@@ -2,44 +2,39 @@ package com.jay.shortlyapi.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.hibernate.annotations.NaturalId;
+import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-import java.util.Base64;
+import java.time.LocalDate;
 import java.util.Date;
 
+@Entity
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name="shortly")
-public class Shortly {
+@Table(name="shortly_stats")
+public class Stats {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-
-    private String originalURL;
-
-    @Column(unique = true, name = "short_code")
-    private String shortCode;
+    private String ipAddress;
+    private String country;
+    private String browser;
+    private String os;
+    private String device;
+    private String visitDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="short_code", referencedColumnName = "short_code")
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "user_id")
     @JsonIgnore
-    private User user;
-
-    private Date created;
+    private Shortly shortly;
 
     @PrePersist
     private void onCreate() {
-        created = new Date();
+        visitDate = LocalDate.now().toString();
     }
-
 }

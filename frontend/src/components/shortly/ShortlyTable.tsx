@@ -1,6 +1,6 @@
-import { useGetUserShortsQuery } from "../redux/features/shortlyApi";
+import { useGetUserShortsQuery } from "../../redux/features/shortlyApi";
 import ShortlyRow from "./ShortlyRow";
-import Spinner from "./Spinner";
+import Spinner from "../util/Spinner";
 
 const ShortlyTable = () => {
   const result = useGetUserShortsQuery();
@@ -31,6 +31,7 @@ const ShortlyTable = () => {
                 ) : (
                   result.data?.map((value, ind) => (
                     <ShortlyRow
+                      key={ind + 1}
                       sno={ind + 1}
                       shortCode={value.shortCode}
                       originalURL={value.originalURL}

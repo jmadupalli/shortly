@@ -2,15 +2,13 @@ package com.jay.shortlyapi.controllers;
 
 import com.jay.shortlyapi.controllers.dto.ShortlyDTO;
 import com.jay.shortlyapi.controllers.dto.ShortlyResponse;
+import com.jay.shortlyapi.controllers.dto.StatsResponse;
 import com.jay.shortlyapi.entities.Shortly;
 import com.jay.shortlyapi.services.ShortlyService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
-import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,6 +38,12 @@ public class ShortlyController {
     @GetMapping("/")
     public List<Shortly> getUserShortly() throws Exception {
         return shortlyService.getUserShortly();
+    }
+
+    @Operation(security = @SecurityRequirement(name="bearerAuth"))
+    @GetMapping("/stats/{shortCode}")
+    public StatsResponse getShortlyStats(@PathVariable String shortCode) throws Exception {
+        return shortlyService.getShortlyStats(shortCode);
     }
 
 }

@@ -2,8 +2,8 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { RootState } from "../../redux/store";
-import ShortlyForm from "../ShortlyForm";
-import ShortlyTable from "../ShortlyTable";
+import ShortlyForm from "../shortly/ShortlyForm";
+import ShortlyTable from "../shortly/ShortlyTable";
 
 const Home = () => {
   const userState = useSelector((state: RootState) => state.user);

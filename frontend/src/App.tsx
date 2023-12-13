@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import Home from "./components/pages/Home";
 import Login from "./components/pages/Login";
 import Register from "./components/pages/Register";
+import Stats from "./components/pages/Stats";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <div className="grow bg-gray-700 p-6 lg:p-12">
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/stats/:code" element={<Stats />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
             </Routes>

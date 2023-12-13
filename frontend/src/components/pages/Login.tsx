@@ -1,31 +1,32 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ApiError, callLogin } from "../../api";
-import ErrorComp from "../ErrorComp";
+import { ApiError, LoginResponse, callLogin } from "../../api";
 import { login } from "../../redux/features/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
+import toast from "react-hot-toast";
+import { AxiosResponse } from "axios";
 
 const Login = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
-  const [error, setError] = useState("");
   const userState = useSelector((state: RootState) => state.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
   useEffect(() => {
     if (userState) navigate("/");
   }, [userState, navigate]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const response = await callLogin(formData).catch((err: ApiError) =>
-      setError(err.response.data.message),
-    );
-    if (response) {
+    const response = (await callLogin(formData).catch((err: ApiError) =>
+      toast.error(err.response.data.message),
+    )) as AxiosResponse<LoginResponse>;
+
+    if (response.status == 200) {
+      toast.success("Login successful!");
       localStorage.setItem("userState", JSON.stringify(response.data));
       dispatch(login(response.data));
     }
@@ -38,7 +39,6 @@ const Login = () => {
 
   return (
     <>
-      {error && <ErrorComp error={error} setError={setError} />}
       <div className="flex h-full align-middle">
         <div className="m-auto flex max-w-md flex-col rounded-md bg-gray-900 p-6 text-gray-100 sm:p-10">
           <div className="mb-8 text-center">
