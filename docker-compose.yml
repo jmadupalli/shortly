@@ -3,9 +3,6 @@ services:
     container_name: shortly-ui
     build:
       context: ./frontend
-    environment:
-      VITE_API_URL: http://localhost:9002/u
-      VITE_SHORTLY_URL: http://localhost:9002/u
     ports:
       - 3000:80
   
