@@ -14,7 +14,7 @@ const ShortlyRow = ({
   created: string;
 }) => {
   const [deleteShort, result] = useDeleteShortMutation();
-  const shortURL = import.meta.env.VITE_API_URL + "/" + shortCode;
+  const shortURL = import.meta.env.VITE_SHORTLY_URL + "/" + shortCode;
   const navigate = useNavigate();
 
   const handleDelete = () => {
@@ -42,7 +42,7 @@ const ShortlyRow = ({
       <td className="p-3">
         <button
           onClick={() => navigate("/stats/" + shortCode)}
-          className="m-1 rounded-md px-3 py-1 font-semibold dark:dark:bg-blue-400 dark:dark:text-gray-900"
+          className="m-1 inline rounded-md px-3 py-1 font-semibold dark:dark:bg-blue-400 dark:dark:text-gray-900"
         >
           Stats
         </button>
@@ -51,7 +51,7 @@ const ShortlyRow = ({
         ) : (
           <button
             onClick={handleDelete}
-            className="rounded-md px-3 py-1 font-semibold dark:dark:bg-red-400 dark:dark:text-gray-900"
+            className="inline rounded-md px-3 py-1 font-semibold dark:dark:bg-red-400 dark:dark:text-gray-900"
           >
             Delete
           </button>

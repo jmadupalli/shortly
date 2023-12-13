@@ -32,7 +32,7 @@ const Stats = () => {
     }
   }, [shortCode, response, navigate]);
 
-  const shortURL = import.meta.env.VITE_API_URL + "/" + shortCode;
+  const shortURL = import.meta.env.VITE_SHORTLY_URL + "/" + shortCode;
 
   return (
     <>
