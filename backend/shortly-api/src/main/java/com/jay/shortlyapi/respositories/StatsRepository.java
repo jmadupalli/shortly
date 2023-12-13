@@ -5,7 +5,6 @@ import com.jay.shortlyapi.entities.Stats;
 import com.jay.shortlyapi.respositories.agg.IBrowserCount;
 import com.jay.shortlyapi.respositories.agg.ICountryCount;
 import com.jay.shortlyapi.respositories.agg.IDeviceCount;
-import com.jay.shortlyapi.respositories.agg.StatResults.*;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

@@ -6,7 +6,11 @@ spring:
     url: ${DB_URL}
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
-
+  cache:
+    cache-names:
+      - rate-limit-buckets
+    caffeine:
+      spec: maximumSize=100000,expireAfterAccess=3600s
   jpa:
     hibernate:
       ddl-auto: update
@@ -19,3 +23,16 @@ server:
   servlet:
     context-path: /u
   port: ${SERVER_PORT}
+
+bucket4j:
+  cache-to-use: jcache
+  enabled: true
+  filters:
+    - cache-name: rate-limit-buckets
+      url: .*
+      rate-limits:
+        - cache-key: getHeader("CF-Connecting-IP") # IP based filter
+          bandwidths: # maximum of 5 requests within 10 seconds
+            - capacity: 100
+              time: 10
+              unit: seconds

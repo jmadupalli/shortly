@@ -81,7 +81,7 @@ public class ShortlyService {
                 .os(c.os.family)
                 .device(c.device.family)
                 .ipAddress(ipAddress)
-                .country(country)
+                .country(country != null? country : "Other")
                 .shortly(shortly)
                 .build();
 

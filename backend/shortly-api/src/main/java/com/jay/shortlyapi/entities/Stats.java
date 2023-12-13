@@ -3,6 +3,8 @@ package com.jay.shortlyapi.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -27,6 +29,7 @@ public class Stats {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="short_code", referencedColumnName = "short_code")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private Shortly shortly;
 
