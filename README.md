@@ -27,6 +27,8 @@ Backend magic:
 
 I've also set up Dockerfiles and Docker Compose as part of docker learning process if someone really wants to test it out in their system. I'm a bit old-school tho, so opted for manual deployment for the demo. Deployed the JAR file to my Linux droplet, set up Nginx as a reverse proxy, and that's it!
 
+Quick note: If you want to use this project for production or deploy it live, Make sure you change the environment variables (check the docker files for a clear example). Especially, the secret key used for JWT tokens.
+
 ### Docker Compose:
 
 >  docker compose up
