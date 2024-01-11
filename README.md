@@ -42,3 +42,21 @@ Backend API will be live at: http://localhost:9002/u/
 >  http://localhost:9002/u/swagger-ui/index.html#/
 
 ![screenshot](demo.png)
+
+Here's the snipped used to generate/store the Short URL:
+
+```java
+    public String createShortly(ShortlyDTO shortlyDTO) throws Exception {
+        User user = getUserFromContext();
+        Shortly shortURL = Shortly.builder()
+                .originalURL(shortlyDTO.getOriginalURL())
+                .user(user)
+                .build();
+        shortURL = shortlyRepository.save(shortURL);
+        String shortCode = Base64.getUrlEncoder().withoutPadding().encodeToString(shortURL.getId().toString().getBytes());
+        shortURL.setShortCode(shortCode);
+        shortlyRepository.save(shortURL);
+        return shortCode;
+
+    }
+```
